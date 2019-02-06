@@ -233,6 +233,15 @@
 		<script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.js"></script>
 		<script src="{{ STATIC_URL }}perfect-scrollbar/dist/perfect-scrollbar.js"></script>
 
+		<!-- bootstrap cdn fallback -->
+    <script>
+        if (! $.fn.modal) {
+          document.write('<link rel="stylesheet" href="{{ STATIC_URL }}/bootstrap_413/css/bootstrap.min.css" />');
+          document.write('<link rel="stylesheet" href="{{ STATIC_URL }}/bootstrap_413/css/bootstrap-reboot.min.css" />');
+          document.write('<link rel="stylesheet" href="{{ STATIC_URL }}/bootstrap_413/css/bootstrap-grid.css" />');
+        }
+    </script>
+
     {% block scripts %}
 
     <script src = "{{ STATIC_URL }}js/opus.js?version={{ OPUS_FILE_VERSION }}" type="text/javascript"></script>
