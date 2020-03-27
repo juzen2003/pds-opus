@@ -1625,6 +1625,7 @@ panel are properly separated */
 .op-sort-order-add-icon {
     margin-bottom: 0.1em !important;
     vertical-align: middle;
+    margin-left: 0.5em;
 }
 
 .op-sort-contents {

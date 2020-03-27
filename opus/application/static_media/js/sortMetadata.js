@@ -20,7 +20,7 @@ let o_sortMetadata = {
     **/
     addBehaviours: function() {
         $(".op-sort-contents").sortable({
-            items: "div",
+            items: "div:not(.op-no-sort)",
             cursor: "grab",
             containment: "parent",
             tolerance: "pointer",
@@ -32,7 +32,8 @@ let o_sortMetadata = {
                     let slug = $(obj).data("slug");
                     order.push(slug);
                 });
-                if (order[length-1] !== "opusid") {
+                console.log(order);
+                if (order[order.length-1] !== "opusid") {
                     // again, we always want opusid last
                     $( ".op-sort-contents" ).sortable("cancel");
                 } else {
@@ -250,7 +251,14 @@ let o_sortMetadata = {
             listHtml += `<span class='op-flip-sort' title='${orderTooltip}'>`;
             listHtml += label;
             listHtml += (isDescending ? `<i class="${pillSortUpArrow} ml-1"></i>` : `<i class="${pillSortDownArrow} ml-1"></i>`);
-            listHtml += "</span></span></div>";
+
+            let sortAddIcon = "";
+            if (extraClass) {
+                sortAddIcon = `<div class="op-sort-order-add-icon list-inline-item" title="Add metadata fields to sort order">`+
+                                `<i class="fas fa-plus"></i>` +
+                            `</div>`;
+            }
+            listHtml += "</span></span>" + sortAddIcon + "</div>";
 
             let fullSlug = slug;
             if (isDescending) {
@@ -261,10 +269,6 @@ let o_sortMetadata = {
                 delete tableColumnFields[slug];
             }
         });
-
-        listHtml += `<div class="op-sort-order-add-icon list-inline-item" title="Add metadata fields to sort order">`+
-                        `<i class="fas fa-plus"></i>` +
-                    `</div>`;
 
         $(".op-sort-contents").html(listHtml);
 
