@@ -1105,13 +1105,13 @@ img.op-slideshow-image-preview {
 
 /* The following will make sure vertical resizing of modal works properly
 without resizing image proportionally. */
-/* Make flex box children items (a tag) stay inside of the parent */
-#galleryView .left {
-    align-items: stretch !important;
-}
-/* Make sure children (img tag) stay inside of it */
+/* The following two stylings make sure children (img tag) stay inside of it */
 #galleryView .left a {
     display: flex;
+    height: 100%;
+}
+#galleryView .left img {
+    object-fit: contain;
 }
 
 #galleryView .modal-dialog, #galleryView .modal-content {
@@ -1130,7 +1130,6 @@ the bottom of modal. Need to use JS to detect the change of modal width */
 } */
 /* #galleryView .row {
     flex-direction: column;
-    align-items: stretch;
 } */
 /* #galleryView .left, #galleryView .right {
     max-width: 100% !important;
