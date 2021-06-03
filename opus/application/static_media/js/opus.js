@@ -845,6 +845,32 @@ var opus = {
             $("#op-reset-opus-modal").modal("show");
         });
 
+        // Test Code
+        // Behavior for submenu, use Browse Products as an example:
+        // 1. When click on Browse Product for the first time, we open the submenu.
+        // 2. Click on Browse Product again, we close the submenu.
+        $("#op-help-test .dropdown-submenu .dropdown-item").on("click", function(e) {
+            let submenu = $(this).next('.dropdown-menu');
+            if (submenu.hasClass("show")) {
+                submenu.removeClass("show");
+            } else {
+                submenu.addClass("show");
+            }
+            e.stopPropagation();
+        });
+        // Click on items inside submenu, we execute something and close the whole dropdown.
+        $("#op-help-test .dropdown-submenu .op-submenu-item").on("click", function(e) {
+            let submenuItem = $(this);
+            // DO SOME ACTION THERE
+            submenuItem.parents(".dropdown-menu").removeClass("show");
+        });
+        // When the parent dropdown is closed, make sure submenu is closed.
+        $("#op-help-test").on("hidden.bs.dropdown", function(e) {
+            let submenu = $("#op-help-test .dropdown-submenu .dropdown-menu");
+            submenu.removeClass("show");
+        });
+        // ///////////////
+
         $(document).on("keydown click", function(e) {
             if ((e.which || e.keyCode) == 27) {
                 // ESC key - close modals and help panel
